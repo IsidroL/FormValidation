@@ -1,0 +1,103 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width">
+  <title>Form Validation</title>
+  <style>
+
+    html {
+      height: 100%;
+      width: 100%;
+    }
+    form {
+      background-color: #fff;
+      padding: 20px;
+      border-radius: 8px;
+      box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+      max-width: 400px;
+      margin: 2 auto;
+    }
+    .error {
+      color: red;
+      margin-top: 5px;
+    }
+
+
+  </style>
+</head>
+
+<body>
+  <h1>Form</h1>
+  
+  <script>
+
+    function validateForm() {
+        var name = document.getElementById('name').value.trim();
+        var email = document.getElementById('email').value.trim();
+        var password = document.getElementById('password').value;
+        var confirmPassword = document.getElementById('confirmPassword').value;
+        var nameExample = /^[a-zA-Z\s]+$/;
+        var emailPattern = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+        var isValid = true;
+        var errorMsg = "";
+
+        if (name === '') {
+            errorMsg += "Name required";
+            isValid = false;
+        } else if (!nameExample.test(name)) {
+            errorMsg += "Letters only";
+            isValid = false;
+        }
+
+        if (email === '') {
+            errorMsg += "Email required";
+            isValid = false;
+        } else if (!emailPattern.test(email)) {
+            errorMsg += "Email is invalid.";
+            isValid = false;
+        }
+
+        if (password === '') {
+            errorMsg += "Password is required.";
+            isValid = false;
+        }
+
+        if (confirmPassword === '') {
+            errorMsg += "Confirm Password is required.";
+            isValid = false;
+        } else if (password !== confirmPassword) {
+            errorMsg += "Passwords do not match.";
+            isValid = false;
+        }
+
+        if (!isValid) {
+            alert(errorMsg);
+        }
+
+        return isValid;
+    }
+    
+  </script>
+
+  <form id="myForm" onsubmit="return validateForm()">
+    <label for="name">Name:</label>
+    <input type="text" id="name" name="name"><br>
+
+    <label for="email">Email:</label>
+    <input type="email" id="email" name="email"><br>
+
+    <label for="password">Password:</label>
+    <input type="password" id="password" name="password"><br>
+
+    <label for="confirmPassword">Confirm Password:</label>
+    <input type="password" id="confirmPassword" name="confirmPassword"><br>
+
+    <input type="submit" value="Submit">
+  </form>
+
+
+</body>
+
+</html>
